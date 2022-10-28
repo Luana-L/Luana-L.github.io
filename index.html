@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" .>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Google Maps API</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400&family=Quicksand:wght@600&family=Source+Sans+Pro&display=swap"
+    rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Prompt:wght@700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div id="map"></div>
+  <script src="app.js"></script>
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5Lz7efVijEPENVUhJBIPY_718UehmL_U&callback=initMap&libraries=drawing,geometry"
+    async></script>
+
+
+  <div id="title">
+    <img src="flood icon.png" />
+    <h3>FLOOD SIMULATION GAME</h3>
+  </div>
+
+  <div id="tools">
+    <div class="sidebar">
+      <a href="#" onclick="openTools()" id="box"><img border="0" alt="toolbox" src="toolbox.png" width="30"
+          height="30"></a>
+      <a href="#" onclick="openHelp()"><img border="0" alt="question" src="questionmark.png" height="40"></a>
+    </div>
+    <div id="toolwindow" class="tool">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeTools()">&times;</a>
+      <h1>TOOL BOX</h1>
+      <div style="display: flex; align-items: center; margin-bottom: 5px;">
+        <p>Toggle Elevation Overlay: </p>
+        <label class="switch">
+          <input type="checkbox" id="toggleoverlay">
+          <span class="slider round"></span>
+        </label> <br>
+      </div>
+      <span class="label">ADD RESERVOIR</span><br>
+      <div class="selection" style="width: 100px; height: 30px; margin-top: 10px;">
+        <p style="margin-right: 5px; white-space: nowrap;">Reservoir Size:</p>
+        <select id="selectmenu">
+          <option value="0">Select:</option>
+          <option value="1">Small</option>
+          <option value="2">Medium</option>
+          <option value="3">Large</option>
+        </select>
+        <button type="button" id="addbutton">Add</button>
+      </div>
+      <p style="line-height: 10px; margin-top: 6px;">Number of Reservoirs: <span id="num"></span></p>
+      <p>Total Reservoir Area: <span id="area"></span></p>
+      <span class="label">BUDGET</span><br>
+      <div id="budSection">
+        <div id="budgetBar">
+          <div id="bbar">
+            <p id="budpercent" style="margin-left: 5px;">100%</p>
+          </div>
+        </div>
+      </div>
+      <p style="line-height: 1%;">Spent: <span id="spent"></span></p>
+      <p style="margin-bottom: 20px;">Remaining: <span id="remaining"></span></p>
+      <span class="label">TIME UNTIL FLOOD</span><br>
+      <div id="timer">
+        <div id="tbar">
+          <span id="floodtime" style="margin-left: 5px;"></span>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center;">
+        <button type="button" id="start" class="bigbtn">START SIMULATION EARLY</button>
+      </div>
+    </div>
+    <div id="helpwindow" class="modal">
+      <div class="modalwindow">
+        <h1>WELCOME TO THE FLOOD SIMULATION!</h1>
+        <p>The goal of this game is to reduce the damage that will be caused by the imminent flood given a certain budget. You'll create reservoirs in order to hold excess water and prevent excessive flooding.</p>
+        <div style="margin-left: 30px; line-height: 10px; font-size: 85%; margin-bottom: 40px; margin-top: 40px;">  
+          <p>1. You have a set budget of $10,000,000 to spend. The cost to build a reservoir is $1,000,000 per km<sup>2</sup>.</p>
+          <p>2. You can toggle the elevation overlay using the switch in the top of the tool box.</p>
+          <p>3. The flood will begin in 5 minutes, time starting once you've closed this window.</p>
+          <p>4. This start window is accessible at any time if you click on the help icon on the right!</p>
+          <p>5. Last but not least, have fun! Good luck :)</p>
+        </div>
+        <p style="font-size: 15px;">Note: Don't delete reservoirs one vertex at a time! Even if you've removed all the
+          points, it is still stored as a reservoir in the system unless you use the delete option in the pop up. Thank
+          you!</p>
+        <div style="display: flex; align-items: center; justify-content: center;">
+          <button type="button" id="play" class="bigbtn" onclick="closeHelp()">START</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="flood" class="modal">
+      <div class="modalwindow"">
+        <div style="display: flex; justify-content: center;">
+          <img class="exclamation" src="exclamation icon.png" style="width: 100px;"><br>
+        </div>
+        <h1 style="margin-top: 20px;">FLOOD STARTING</h1>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>
